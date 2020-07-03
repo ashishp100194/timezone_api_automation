@@ -1,0 +1,161 @@
+C:\Users\Ashish\PycharmProjects\TimezoneAPI\PythonLibrary\GlobalUtilities>python test_List_Time_Zone.py
+
+
+Executing testcase: List_Time_Zone_TC1
+Verify list time zone api gives valid response by providing valid key
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&country=NZ
+Method Type: GET
+{'message': '',
+ 'status': 'OK',
+ 'zones': [{'countryCode': 'NZ',
+            'countryName': 'New Zealand',
+            'gmtOffset': 46800,
+            'timestamp': 1583895541,
+            'zoneName': 'Pacific/Auckland'},
+           {'countryCode': 'NZ',
+            'countryName': 'New Zealand',
+            'gmtOffset': 49500,
+            'timestamp': 1583898241,
+            'zoneName': 'Pacific/Chatham'}]}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC2
+Verify that all fields in the list time zone api response are present
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&zone=Pacific/Auckland
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>OK</status><message/><zones><zone><countryCode>NZ</countryCode><countryName>New Zealand</countryName><zoneName>Pacific/Auckland</zoneName><gmtOffset>46800</gmtOffset><timestamp>1583895542</timestamp></zone></zones></result>\n'
+{'result': {'message': None,
+            'status': 'OK',
+            'zones': {'zone': {'countryCode': 'NZ',
+                               'countryName': 'New Zealand',
+                               'gmtOffset': '46800',
+                               'timestamp': '1583895542',
+                               'zoneName': 'Pacific/Auckland'}}}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC3
+Verify the list time zone api gives status Failed response when key parameter is missing
+http://api.timezonedb.com/v2.1/list-time-zone?
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Parameter "key" (API Key) is not provided.</message><zones/></result>\n'
+{'result': {'message': 'Parameter "key" (API Key) is not provided.',
+            'status': 'FAILED',
+            'zones': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "key" (API Key) is not provided.
+
+
+Executing testcase: List_Time_Zone_TC4
+Verify list time zone api gives status Failed response when invalid key parameter is provided
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5J&zone=Pacific/Auckland
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Invalid API key.</message><zones/></result>\n'
+{'result': {'message': 'Invalid API key.', 'status': 'FAILED', 'zones': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid API key.
+
+
+Executing testcase: List_Time_Zone_TC5
+Verify the api response when two key parameter are provided
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&key=PALRVZNM5JDD&country=NZ
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>OK</status><message/><zones><zone><countryCode>NZ</countryCode><countryName>New Zealand</countryName><zoneName>Pacific/Auckland</zoneName><gmtOffset>46800</gmtOffset><timestamp>1583895544</timestamp></zone><zone><countryCode>NZ</countryCode><countryName>New Zealand</countryName><zoneName>Pacific/Chatham</zoneName><gmtOffset>49500</gmtOffset><timestamp>1583898244</timestamp></zone></zones></result>\n'
+{'result': {'message': None,
+            'status': 'OK',
+            'zones': {'zone': [{'countryCode': 'NZ',
+                                'countryName': 'New Zealand',
+                                'gmtOffset': '46800',
+                                'timestamp': '1583895544',
+                                'zoneName': 'Pacific/Auckland'},
+                               {'countryCode': 'NZ',
+                                'countryName': 'New Zealand',
+                                'gmtOffset': '49500',
+                                'timestamp': '1583898244',
+                                'zoneName': 'Pacific/Chatham'}]}}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC6
+Verify list time zone api supports optional parameters and gives valid response when they are provided
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&zone=Asia/Tokyo&fields=zoneName,gmtOffset
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>OK</status><message/><zones><zone><zoneName>Asia/Tokyo</zoneName><gmtOffset>32400</gmtOffset></zone></zones></result>\n'
+{'result': {'message': None,
+            'status': 'OK',
+            'zones': {'zone': {'gmtOffset': '32400',
+                               'zoneName': 'Asia/Tokyo'}}}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC7
+Verify list time zone api response when format type specified is json
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&country=US&zone=*New*
+Method Type: GET
+{'message': '',
+ 'status': 'OK',
+ 'zones': [{'countryCode': 'US',
+            'countryName': 'United States',
+            'gmtOffset': -14400,
+            'timestamp': 1583834347,
+            'zoneName': 'America/New_York'},
+           {'countryCode': 'US',
+            'countryName': 'United States',
+            'gmtOffset': -18000,
+            'timestamp': 1583830747,
+            'zoneName': 'America/North_Dakota/New_Salem'}]}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC8
+Verify list time zone api response when invalid format type is specified
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&format=html
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Invalid output format.</message><zones/></result>\n'
+{'result': {'message': 'Invalid output format.',
+            'status': 'FAILED',
+            'zones': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid output format.
+
+
+Executing testcase: List_Time_Zone_TC9
+Verify list time zone api response when valid country code is provided in country parameter
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&country=IN
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>OK</status><message/><zones><zone><countryCode>IN</countryCode><countryName>India</countryName><zoneName>Asia/Kolkata</zoneName><gmtOffset>19800</gmtOffset><timestamp>1583868549</timestamp></zone></zones></result>\n'
+{'result': {'message': None,
+            'status': 'OK',
+            'zones': {'zone': {'countryCode': 'IN',
+                               'countryName': 'India',
+                               'gmtOffset': '19800',
+                               'timestamp': '1583868549',
+                               'zoneName': 'Asia/Kolkata'}}}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: List_Time_Zone_TC10
+Verify the list time zone api response when invalid or not supported country code is provided in country parameter
+http://api.timezonedb.com/v2.1/list-time-zone?key=PALRVZNM5JDD&country=XY
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Invalid ISO 3166-1 country code.</message><zones/></result>\n'
+{'result': {'message': 'Invalid ISO 3166-1 country code.',
+            'status': 'FAILED',
+            'zones': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid ISO 3166-1 country code.

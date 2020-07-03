@@ -1,0 +1,201 @@
+
+C:\Users\Ashish\PycharmProjects\TimezoneAPI\PythonLibrary\GlobalUtilities>python test_Get_Time_Zone.py
+
+
+Executing testcase: Get_Time_Zone_TC1
+Verify the time zone details are displayed correctly only by providing required parameters
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=zone&zone=America/Chicago
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="utf-8"?>\n<result><status>OK</status><message/><countryCode>US</countryCode><countryName>United States</countryName><zoneName>America/Chicago</zoneName><abbreviation>CDT</abbreviation><gmtOffset>-18000</gmtOffset><dst>1</dst><zoneStart>1583654400</zoneStart><zoneEnd>1604213999</zoneEnd><nextAbbreviation>CST</nextAbbreviation><timestamp>1583831130</timestamp><formatted>2020-03-10 09:05:30</formatted></result>\n'
+{'result': {'abbreviation': 'CDT',
+            'countryCode': 'US',
+            'countryName': 'United States',
+            'dst': '1',
+            'formatted': '2020-03-10 09:05:30',
+            'gmtOffset': '-18000',
+            'message': None,
+            'nextAbbreviation': 'CST',
+            'status': 'OK',
+            'timestamp': '1583831130',
+            'zoneEnd': '1604213999',
+            'zoneName': 'America/Chicago',
+            'zoneStart': '1583654400'}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: Get_Time_Zone_TC2
+Verify the time zone details are not returned when "by" parameter is not provided
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="utf-8"?>\n<result><status>FAILED</status><message>Parameter "by" (Lookup method) is not provided.</message><countryCode/><countryName/><zoneName/><abbreviation/><gmtOffset>0</gmtOffset><dst>0</dst><zoneStart>0</zoneStart><zoneEnd/><nextAbbreviation/><timestamp>0</timestamp><formatted/></result>\n'
+{'result': {'abbreviation': None,
+            'countryCode': None,
+            'countryName': None,
+            'dst': '0',
+            'formatted': None,
+            'gmtOffset': '0',
+            'message': 'Parameter "by" (Lookup method) is not provided.',
+            'nextAbbreviation': None,
+            'status': 'FAILED',
+            'timestamp': '0',
+            'zoneEnd': None,
+            'zoneName': None,
+            'zoneStart': '0'}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "by" (Lookup method) is not provided.
+
+
+Executing testcase: Get_Time_Zone_TC3
+Verify get time zone api failed response when Key is not provided
+http://api.timezonedb.com/v2.1/get-time-zone?&by=position&lat=40.689247&lng=-74.044502
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="utf-8"?>\n<result><status>FAILED</status><message>Parameter "key" (API Key) is not provided.</message><countryCode/><countryName/><zoneName/><abbreviation/><gmtOffset>0</gmtOffset><dst>0</dst><zoneStart>0</zoneStart><zoneEnd/><nextAbbreviation/><timestamp>0</timestamp><formatted/></result>\n'
+{'result': {'abbreviation': None,
+            'countryCode': None,
+            'countryName': None,
+            'dst': '0',
+            'formatted': None,
+            'gmtOffset': '0',
+            'message': 'Parameter "key" (API Key) is not provided.',
+            'nextAbbreviation': None,
+            'status': 'FAILED',
+            'timestamp': '0',
+            'zoneEnd': None,
+            'zoneName': None,
+            'zoneStart': '0'}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "key" (API Key) is not provided.
+
+
+Executing testcase: Get_Time_Zone_TC4
+Verify whether get time zone api returns valid response by providing valid zone.
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&format=xml&by=zone&zone=Asia/Kabul
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="utf-8"?>\n<result><status>OK</status><message/><countryCode>AF</countryCode><countryName>Afghanistan</countryName><zoneName>Asia/Kabul</zoneName><abbreviation>AFT</abbreviation><gmtOffset>16200</gmtOffset><dst>0</dst><zoneStart>-788932800</zoneStart><zoneEnd/><nextAbbreviation/><timestamp>1583865335</timestamp><formatted>2020-03-10 18:35:35</formatted></result>\n'
+{'result': {'abbreviation': 'AFT',
+            'countryCode': 'AF',
+            'countryName': 'Afghanistan',
+            'dst': '0',
+            'formatted': '2020-03-10 18:35:35',
+            'gmtOffset': '16200',
+            'message': None,
+            'nextAbbreviation': None,
+            'status': 'OK',
+            'timestamp': '1583865335',
+            'zoneEnd': None,
+            'zoneName': 'Asia/Kabul',
+            'zoneStart': '-788932800'}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: Get_Time_Zone_TC5
+Verify whether get time zone api returns failed response by providing invalid zone.
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=zone&zone=Asia\Kabul
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="utf-8"?>\n<result><status>FAILED</status><message>Record not found.</message><countryCode/><countryName/><zoneName/><abbreviation/><gmtOffset>0</gmtOffset><dst>0</dst><zoneStart>0</zoneStart><zoneEnd/><nextAbbreviation/><timestamp>0</timestamp><formatted/></result>\n'
+{'result': {'abbreviation': None,
+            'countryCode': None,
+            'countryName': None,
+            'dst': '0',
+            'formatted': None,
+            'gmtOffset': '0',
+            'message': 'Record not found.',
+            'nextAbbreviation': None,
+            'status': 'FAILED',
+            'timestamp': '0',
+            'zoneEnd': None,
+            'zoneName': None,
+            'zoneStart': '0'}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Record not found.
+
+
+Executing testcase: Get_Time_Zone_TC6
+Verify whether get time zone api returns valid response by providing valid position.
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=position&lat=40.689247&lng=-74.044502
+Method Type: GET
+{'abbreviation': 'EDT',
+ 'countryCode': 'US',
+ 'countryName': 'United States',
+ 'dst': '1',
+ 'formatted': '2020-03-10 10:05:38',
+ 'gmtOffset': -14400,
+ 'message': '',
+ 'nextAbbreviation': 'EST',
+ 'status': 'OK',
+ 'timestamp': 1583834738,
+ 'zoneEnd': 1604210400,
+ 'zoneName': 'America/New_York',
+ 'zoneStart': 1583650800}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: Get_Time_Zone_TC7
+Verify whether get time zone api returns failed response by providing invalid position.
+http://api.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=position&lat=40689247&lng=-74044502
+Method Type: GET
+{'abbreviation': '',
+ 'countryCode': '',
+ 'countryName': '',
+ 'dst': 0,
+ 'formatted': '',
+ 'gmtOffset': 0,
+ 'message': 'Record not found.',
+ 'nextAbbreviation': None,
+ 'status': 'FAILED',
+ 'timestamp': 0,
+ 'zoneEnd': None,
+ 'zoneName': '',
+ 'zoneStart': 0}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Record not found.
+
+
+Executing testcase: Get_Time_Zone_TC8
+Verify whether get time zone api returns valid response by providing valid city.
+http://vip.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=city&city=City+of+Buffalo&country=US
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Invalid API key.</message><totalPage>1</totalPage><currentPage>1</currentPage><zones/></result>\n'
+{'result': {'currentPage': '1',
+            'message': 'Invalid API key.',
+            'status': 'FAILED',
+            'totalPage': '1',
+            'zones': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid API key.
+
+
+Executing testcase: Get_Time_Zone_TC9
+Verify whether get time zone api returns failed response by providing invalid city.
+http://vip.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=city&city=Buffalo&country=US
+Method Type: GET
+{'currentPage': 1,
+ 'message': 'Invalid API key.',
+ 'status': 'FAILED',
+ 'totalPage': 1,
+ 'zones': []}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid API key.
+
+
+Executing testcase: Get_Time_Zone_TC10
+Verify whether get time zone api returns valid response when valid visitor IP address is provided
+http://vip.timezonedb.com/v2.1/get-time-zone?key=PALRVZNM5JDD&by=ip&ip=139.5.48.179&fields=countryCode,cityName,gmtOffset,dst
+Method Type: GET
+{'cityName': '',
+ 'countryCode': '',
+ 'dst': 0,
+ 'gmtOffset': 0,
+ 'message': 'Invalid API key.',
+ 'status': 'FAILED'}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid API key.

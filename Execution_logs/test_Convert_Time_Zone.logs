@@ -1,0 +1,182 @@
+Executing testcase: Convert_Time_Zone_TC1
+Verify the timestamp is converted successfully between two time zones by providing only required parameters
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America/Los_Angeles&to=Australia/Sydney&time=1464793200
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>OK</status><message/><fromZoneName>America/Los_Angeles</fromZoneName><fromAbbreviation>PDT</fromAbbreviation><fromTimestamp>1464793200</fromTimestamp><toZoneName>Australia/Sydney</toZoneName><toAbbreviation>AEST</toAbbreviation><toTimestamp>1464854400</toTimestamp><offset>61200</offset></result>\n'
+{'result': {'fromAbbreviation': 'PDT',
+            'fromTimestamp': '1464793200',
+            'fromZoneName': 'America/Los_Angeles',
+            'message': None,
+            'offset': '61200',
+            'status': 'OK',
+            'toAbbreviation': 'AEST',
+            'toTimestamp': '1464854400',
+            'toZoneName': 'Australia/Sydney'}}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: Convert_Time_Zone_TC2
+Verify the timestamp conversion fails when "to" required parameter is not provided
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&format=xml&from=America/Los_Angeles
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Parameter "to" (Time Zone Name or Abbreviation) is not provided.</message><fromZoneName/><fromAbbreviation/><fromTimestamp>1583849326</fromTimestamp><toZoneName/><toAbbreviation/><toTimestamp>0</toTimestamp><offset>0</offset></result>\n'
+{'result': {'fromAbbreviation': None,
+            'fromTimestamp': '1583849326',
+            'fromZoneName': None,
+            'message': 'Parameter "to" (Time Zone Name or Abbreviation) is not '
+                       'provided.',
+            'offset': '0',
+            'status': 'FAILED',
+            'toAbbreviation': None,
+            'toTimestamp': '0',
+            'toZoneName': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "to" (Time Zone Name or Abbreviation) is not provided.
+
+
+Executing testcase: Convert_Time_Zone_TC3
+Verify the timestamp conversion fails when "from" required parameter is not provided
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&format=xml&to=Australia/Sydney&time=1464793200
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Parameter "from" (Time Zone Name or Abbreviation) is not provided.</message><fromZoneName/><fromAbbreviation/><fromTimestamp>1464793200</fromTimestamp><toZoneName/><toAbbreviation/><toTimestamp>0</toTimestamp><offset>0</offset></result>\n'
+{'result': {'fromAbbreviation': None,
+            'fromTimestamp': '1464793200',
+            'fromZoneName': None,
+            'message': 'Parameter "from" (Time Zone Name or Abbreviation) is '
+                       'not provided.',
+            'offset': '0',
+            'status': 'FAILED',
+            'toAbbreviation': None,
+            'toTimestamp': '0',
+            'toZoneName': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "from" (Time Zone Name or Abbreviation) is not provided.
+
+
+Executing testcase: Convert_Time_Zone_TC4
+Verify the timestamp conversion fails when "to" required parameter provided is invalid
+http://api.timezonedb.com/v2.1/convert-time-zone?key=MS14O6NBK8L9&from=America/Los_Angeles&to=Australia\Sydney&time=1464793200
+Method Type: GET
+{'fromAbbreviation': 'PDT',
+ 'fromTimestamp': 1464793200,
+ 'fromZoneName': 'America/Los_Angeles',
+ 'message': 'To Time Zone: Invalid zone name or abbreviation.',
+ 'offset': 0,
+ 'status': 'FAILED',
+ 'toAbbreviation': '',
+ 'toTimestamp': 0,
+ 'toZoneName': ''}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: To Time Zone: Invalid zone name or abbreviation.
+
+
+Executing testcase: Convert_Time_Zone_TC5
+Verify the timestamp conversion fails when "from" required parameter provided is invalid
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America\Los_Angeles&to=Australia/Sydney&time=1464793200
+Method Type: GET
+{'fromAbbreviation': '',
+ 'fromTimestamp': 1464793200,
+ 'fromZoneName': '',
+ 'message': 'From Time Zone: Invalid zone name or abbreviation.',
+ 'offset': 0,
+ 'status': 'FAILED',
+ 'toAbbreviation': '',
+ 'toTimestamp': 0,
+ 'toZoneName': ''}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: From Time Zone: Invalid zone name or abbreviation.
+
+
+Executing testcase: Convert_Time_Zone_TC6
+Verify the timestamp conversion fails when both the required parameter provided are invalid
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America\Los_Angeles&to=Australia\Sydney&time=1464793200
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>From Time Zone: Invalid zone name or abbreviation.</message><fromZoneName/><fromAbbreviation/><fromTimestamp>1464793200</fromTimestamp><toZoneName/><toAbbreviation/><toTimestamp>0</toTimestamp><offset>0</offset></result>\n'
+{'result': {'fromAbbreviation': None,
+            'fromTimestamp': '1464793200',
+            'fromZoneName': None,
+            'message': 'From Time Zone: Invalid zone name or abbreviation.',
+            'offset': '0',
+            'status': 'FAILED',
+            'toAbbreviation': None,
+            'toTimestamp': '0',
+            'toZoneName': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: From Time Zone: Invalid zone name or abbreviation.
+
+
+Executing testcase: Convert_Time_Zone_TC7
+Verify the timestamp conversion fails  when Key is not provided
+http://api.timezonedb.com/v2.1/convert-time-zone?&from=America/Los_Angeles&to=Australia/Sydney&time=1464793200
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Parameter "key" (API Key) is not provided.</message><fromZoneName/><fromAbbreviation/><fromTimestamp>1464793200</fromTimestamp><toZoneName/><toAbbreviation/><toTimestamp>0</toTimestamp><offset>0</offset></result>\n'
+{'result': {'fromAbbreviation': None,
+            'fromTimestamp': '1464793200',
+            'fromZoneName': None,
+            'message': 'Parameter "key" (API Key) is not provided.',
+            'offset': '0',
+            'status': 'FAILED',
+            'toAbbreviation': None,
+            'toTimestamp': '0',
+            'toZoneName': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Parameter "key" (API Key) is not provided.
+
+
+Executing testcase: Convert_Time_Zone_TC8
+Verify if the timestamp can be converted between one from and two To parameters
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America/Los_Angeles&to=Australia/Sydney&to=Asia/Kabul&time=1464793200
+Method Type: GET
+{'fromAbbreviation': 'PDT',
+ 'fromTimestamp': 1464793200,
+ 'fromZoneName': 'America/Los_Angeles',
+ 'message': '',
+ 'offset': 41400,
+ 'status': 'OK',
+ 'toAbbreviation': 'AFT',
+ 'toTimestamp': 1464834600,
+ 'toZoneName': 'Asia/Kabul'}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
+
+
+Executing testcase: Convert_Time_Zone_TC9
+Verify if timestamp conversion by providing invalid unixtime
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America/Los_Angeles&to=Asia/Kabul&time=14647932@!
+Method Type: GET
+The response is in XML. This response will be converted into dict to parse easily!
+XML: b'<?xml version="1.0" encoding="UTF-8"?>\n<result><status>FAILED</status><message>Invalid timestamp provided.</message><fromZoneName/><fromAbbreviation/><fromTimestamp>14647932</fromTimestamp><toZoneName/><toAbbreviation/><toTimestamp>0</toTimestamp><offset>0</offset></result>\n'
+{'result': {'fromAbbreviation': None,
+            'fromTimestamp': '14647932',
+            'fromZoneName': None,
+            'message': 'Invalid timestamp provided.',
+            'offset': '0',
+            'status': 'FAILED',
+            'toAbbreviation': None,
+            'toTimestamp': '0',
+            'toZoneName': None}}
+Response Code 200 validated successfully
+Response contains valid Status: FAILED and valid Message: Invalid timestamp provided.
+
+
+Executing testcase: Convert_Time_Zone_TC10
+Verify if timestamp conversion by not providing unixtime
+http://api.timezonedb.com/v2.1/convert-time-zone?key=PALRVZNM5JDD&from=America/Los_Angeles&to=Asia/Kabul
+Method Type: GET
+{'fromAbbreviation': 'PDT',
+ 'fromTimestamp': 1583849343,
+ 'fromZoneName': 'America/Los_Angeles',
+ 'message': '',
+ 'offset': 41400,
+ 'status': 'OK',
+ 'toAbbreviation': 'AFT',
+ 'toTimestamp': 1583890743,
+ 'toZoneName': 'Asia/Kabul'}
+Response Code 200 validated successfully
+Response contains valid Status: OK and valid Message: None
